@@ -15,6 +15,6 @@
     "noEmit": false,
     "jsx": "react"
   },
-  "include": ["src"],
+  "include": ["src", "secrets.development.js"],
   "exclude": ["build", "node_modules"]
 }

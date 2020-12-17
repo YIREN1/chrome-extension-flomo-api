@@ -1,6 +1,13 @@
 import { Notyf } from 'notyf';
 // Create an instance of Notyf
-const notyf = new Notyf();
+import 'notyf/notyf.min.css';
+
+const notyf = new Notyf({
+  position: {
+    x: 'right',
+    y: 'top',
+  },
+});
 
 const MOUSE_UP = 'mouseup',
   selection = getSelection();
@@ -24,12 +31,8 @@ const setStyleProp = (el, obj) => {
 function firstMouseUp(e) {
   // console.log(e.target);
   const text = getText();
-  // removeFirstMouseUp();
-
-  // console.log(btn.contains(e.target), text);
   if (btn.contains(e.target) && !text) {
     return;
-    // removeFirstMouseUp();
   }
   if (enabled && text) {
     let btnPos = {
@@ -68,15 +71,11 @@ document.addEventListener(MOUSE_UP, firstMouseUp);
 document.addEventListener('mousedown', (e) => {
   const { target } = e;
   if (btn.contains(target)) {
-    // console.log(target);
     e.preventDefault();
-    // console.log('contain');
-    onClikcButton();
-    // removeFirstMouseUp();
+    // onClikcButton();
   } else {
-    // document.addEventListener(MOUSE_UP, firstMouseUp);
+    btn.style.display = 'none';
   }
-  btn.style.display = 'none';
 });
 
 let btn = document.createElement('BUTTON'); // Create a <button> element
@@ -96,7 +95,6 @@ const spanStyle = {
   backgroundImage: imgURL,
 };
 setStyleProp(span, spanStyle);
-div.addEventListener('click', onClikcButton, false);
 
 btn.appendChild(span);
 
@@ -104,8 +102,12 @@ document.documentElement.appendChild(div);
 
 const event = new Event('select');
 
+btn.addEventListener('click', onClikcButton, false);
+
 function onClikcButton() {
-  // alert('click');
+  alert('click');
+  btn.style.display = 'none';
+
   const text = getText();
   // console.log(text);
   let message = {
@@ -115,36 +117,15 @@ function onClikcButton() {
 
   function handleResponse(res) {
     console.log(res);
-    if (res) {
-      notifyMe(res.message);
+    if (!res) {
+      return;
+    }
+    if (res?.data === 0) {
+      notyf.success(res.message);
+    } else {
+      notyf.error(res.message);
     }
   }
-}
-
-function notifyMe(content = 'hi there') {
-  // Let's check if the browser supports notifications
-  if (!('Notification' in window)) {
-    alert('This browser does not support desktop notification');
-  }
-
-  // Let's check whether notification permissions have already been granted
-  else if (Notification.permission === 'granted') {
-    // If it's okay let's create a notification
-    var notification = new Notification(content);
-  }
-
-  // Otherwise, we need to ask the user for permission
-  else if (Notification.permission !== 'denied') {
-    Notification.requestPermission().then(function (permission) {
-      // If the user accepts, let's create a notification
-      if (permission === 'granted') {
-        var notification = new Notification(content);
-      }
-    });
-  }
-
-  // At last, if the user has denied notifications, and you
-  // want to be respectful there is no need to bother them any more.
 }
 
 console.log('content scripts loaded, react');
