@@ -5,6 +5,7 @@
   "background": {
     "page": "background.html"
   },
+  "permissions": ["storage"],
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": "logo-192.png"
@@ -19,10 +20,7 @@
       "css": ["content.styles.css"]
     }
   ],
-  "web_accessible_resources": [
-    "content.styles.css",
-    "logo-192.png"
-  ],
+  "web_accessible_resources": ["content.styles.css", "logo-192.png"],
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

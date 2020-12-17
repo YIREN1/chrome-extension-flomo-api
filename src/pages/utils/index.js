@@ -1,13 +1,9 @@
-
 import promisify from './promisify';
+import { getDefaultOptions } from './default-options';
+import chromeCall from 'chrome-call';
 
-const chromeCall = () => {};
-
-export default function getOptions(keys, area = 'local') {
-  //default options
-  return promisify(chrome.storage[area].get).then((data) => {
-    console.log(data);
-  });
+export async function getOptions(keys, area = 'local') {
+  return chromeCall(`storage.${area}`, 'get',getDefaultOptions(keys));
 }
 
 export async function getCurrentTabId() {

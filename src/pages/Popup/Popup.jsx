@@ -1,19 +1,30 @@
 import React, { useState } from 'react';
 import './Popup.css';
 import secrets from 'secrets';
-
+import { getOptions } from '../utils';
+import { get } from 'jquery';
 const Popup = () => {
   const [api, setApi] = useState(secrets.FLOMO_API || '');
   const [enabledForCurPage, setEnabledForCurPage] = useState(true);
   console.log(api);
+
   function handleClick(e) {
     chrome.runtime.sendMessage({
       api,
     });
   }
+  const handleToggleEnable = async (e) => {
+    try {
+      const res = await getOptions('excludeDomains');
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
 
-  function handleChange(e) {
     console.log(e.target.value);
+    setEnabledForCurPage(Boolean(e.target.value));
+  };
+  async function handleChange(e) {
     setApi(e.target.value);
   }
   return (
@@ -38,13 +49,9 @@ const Popup = () => {
             type="checkbox"
             id="flexSwitchCheckDefault"
             value={enabledForCurPage}
-            onChange={(e) => {
-              console.log(e.target.value);
-              setEnabledForCurPage(Boolean(e.target.value));
-              console.log(enabledForCurPage);
-            }}
+            onChange={handleToggleEnable}
           />
-          <label className="form-check-label" for="flexSwitchCheckDefault">
+          <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
             {enabledForCurPage ? 'enabled' : 'disabled'} for current page
           </label>
         </div>

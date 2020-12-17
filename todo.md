@@ -17,4 +17,7 @@
 - []
 - []
 
+troubles:
+
 Extension context invalidated happens when loaded new content_script, refresh will fix...
+chrome.storage undefined -- permissions
