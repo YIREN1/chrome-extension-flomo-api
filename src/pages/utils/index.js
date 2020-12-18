@@ -3,7 +3,16 @@ import { getDefaultOptions } from './default-options';
 import chromeCall from 'chrome-call';
 
 export async function getOptions(keys, area = 'local') {
-  return chromeCall(`storage.${area}`, 'get',getDefaultOptions(keys));
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(getDefaultOptions(keys), (response) => {
+      if (chrome.runtime.lastError) {
+        reject(chrome.runtime.lastError);
+      } else {
+        resolve(response);
+      }
+    });
+  });
+  // return chromeCall(`storage.${area}`, 'get', 'excludeDomains');
 }
 
 export async function getCurrentTabId() {
