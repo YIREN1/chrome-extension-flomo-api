@@ -4,7 +4,7 @@ import './Popup.css';
 import { getOptions, isHostEnabled } from '../utils';
 import { get } from 'jquery';
 const Popup = () => {
-  const [api, setApi] = useState( '');
+  const [api, setApi] = useState('');
   const [enabledForCurPage, setEnabledForCurPage] = useState(true);
   console.log(api);
 
@@ -24,8 +24,8 @@ const Popup = () => {
       console.log(error);
     }
 
-    console.log(e.target.value);
-    setEnabledForCurPage(Boolean(e.target.value));
+    // console.log(e.target.value);
+    setEnabledForCurPage(!enabledForCurPage);
   };
   async function handleChange(e) {
     setApi(e.target.value);
@@ -51,7 +51,7 @@ const Popup = () => {
             className="form-check-input"
             type="checkbox"
             id="flexSwitchCheckDefault"
-            value={enabledForCurPage}
+            checked={enabledForCurPage}
             onChange={handleToggleEnable}
           />
           <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
