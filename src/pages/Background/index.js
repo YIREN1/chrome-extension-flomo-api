@@ -1,6 +1,6 @@
 import '../../assets/img/logo-192.png';
-
-console.log('This is the background page.');
+import './badge';
+console.log('background page.');
 chrome.runtime.onMessage.addListener(receiver);
 let FLOMO_API = '';
 

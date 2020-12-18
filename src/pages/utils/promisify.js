@@ -1,4 +1,4 @@
-export default function promisify(f) {
+export default function chromeCall(f) {
   return function (...args) {
     // return a wrapper-function (*)
     return new Promise((resolve) => {

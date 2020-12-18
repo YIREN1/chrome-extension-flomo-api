@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './Popup.css';
-import secrets from 'secrets';
-import { getOptions } from '../utils';
+// import secrets from 'secrets'.;
+import { getOptions, isHostEnabled } from '../utils';
 import { get } from 'jquery';
 const Popup = () => {
-  const [api, setApi] = useState(secrets.FLOMO_API || '');
+  const [api, setApi] = useState( '');
   const [enabledForCurPage, setEnabledForCurPage] = useState(true);
   console.log(api);
 
@@ -17,6 +17,9 @@ const Popup = () => {
     try {
       const res = await getOptions('excludeDomains');
       console.log(res);
+
+      const enable = await isHostEnabled();
+      console.log(enable);
     } catch (error) {
       console.log(error);
     }

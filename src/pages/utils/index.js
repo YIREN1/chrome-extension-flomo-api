@@ -2,7 +2,7 @@ import promisify from './promisify';
 import { getDefaultOptions } from './default-options';
 import chromeCall from 'chrome-call';
 
-export async function getOptions(keys, area = 'local') {
+export async function chromeLocalGet(keys) {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get(getDefaultOptions(keys), (response) => {
       if (chrome.runtime.lastError) {
@@ -12,6 +12,10 @@ export async function getOptions(keys, area = 'local') {
       }
     });
   });
+}
+
+export async function getOptions(keys, area = 'local') {
+  return chromeLocalGet(keys);
   // return chromeCall(`storage.${area}`, 'get', 'excludeDomains');
 }
 
@@ -49,10 +53,7 @@ export async function getTabLocation(tabId) {
  * @returns {Boolean} - 如果应该启用，则返回 true，否则为 false；但如果没有权限获取当前标签页的 location 对象，则返回 null。
  */
 export async function isHostEnabled(locationObj, disabledDomainList) {
-  const { disableSelection } = await chromeCall(
-    'storage.local.get',
-    'disableSelection'
-  );
+  const { disableSelection } = await chromeLocalGet('disableSelection');
 
   if (disableSelection) {
     return false;
@@ -70,6 +71,6 @@ export async function isHostEnabled(locationObj, disabledDomainList) {
   const { host } = location;
   const domains =
     disabledDomainList ||
-    (await chromeCall('storage.local.get', 'excludeDomains')).excludeDomains;
+    (await chromeLocalGet('excludeDomains')).excludeDomains;
   return !domains || !domains.some((domain) => host.endsWith(domain));
 }
