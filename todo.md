@@ -2,18 +2,21 @@
 - [x] get api url from popup
 - [x] enable/disable current page feature
 - [x] better notification, now it send notification on behalf of the current site and need permission
-- [] persistent api url
-- [] persistenet exclude domains
+- [x] persistent api url
+- [x] persistenet exclude domains
 - [] readme
-- [] style button
-- [] style popup
-- [] console.log
-- [] on storage-change send message to enable content script
-- [] api received feedback
-- [] error: asyncToGenerator.js?6eeb:6 Uncaught (in promise) 
-- [] remove #testfromChrome
+- [x] style button
+- [x] style popup
+- [] console.logs
+- [x] on storage-change send message to enable content script
+- [x] api received feedback
+- [x] remove #testfromChrome
+- [] show api on popup after set
 release
 
+- [] auto detect url from https://flomoapp.com/mine?source=incoming_webhook
+- [] error: asyncToGenerator.js?6eeb:6 Uncaught (in promise) 
+- [] support other official API
 - [] options page
 - [x] bug :Unchecked runtime.lastError: The message port closed before a response was received.
  (refresh might fix ?)

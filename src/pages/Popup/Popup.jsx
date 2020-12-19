@@ -9,7 +9,7 @@ import {
   chromeLocalSet,
   chromeTabsSendMessage,
 } from '../utils';
-import { get } from 'jquery';
+
 const Popup = () => {
   const [api, setApi] = useState('');
   const [enabledForCurPage, setEnabledForCurPage] = useState(true);
@@ -17,6 +17,9 @@ const Popup = () => {
   useEffect(() => {
     const ready = async () => {
       const curLocation = await getTabLocation();
+      const { FLOMO_API } = await getOptions('FLOMO_API');
+      console.log(FLOMO_API);
+      setApi(FLOMO_API);
       setLocation(curLocation);
       if (curLocation) {
         const enable = await isHostEnabled(location);
@@ -60,34 +63,47 @@ const Popup = () => {
     setApi(e.target.value);
   }
   return (
-    <div className="App">
-      <form>
-        <div className="form-group">
-          your flomo api
-          <input id="api_input" value={api} onChange={handleChange} />
-          <button
-            type="button"
-            className="btn btn-primary"
-            id="confirmBtn"
-            onClick={handleClick}
-          >
-            confirm
-          </button>
+    <div className="">
+      <form className="row mb-3">
+        <div className="form-group col-md-6">
+          <div className="form-floating mb-3 d-flex justify-content-center align-items-center">
+            <input
+              type="text"
+              className="form-control"
+              id="api"
+              value={api}
+              onChange={handleChange}
+              placeholder="https://flomoapp.com/iwh/"
+            />
+            <label htmlFor="floatingInput">Flomo API</label>
+            <button
+              type="submit"
+              className="btn btn-primary btn-sm"
+              id="confirmBtn"
+              onClick={handleClick}
+            >
+              save
+            </button>
+          </div>
         </div>
-
-        <div className="form-check form-switch">
+      </form>
+      <div className="row mb-3 form-check form-switch">
+        <div className="">
           <input
-            className="form-check-input"
+            className="form-check-input col-auto"
             type="checkbox"
             id="flexSwitchCheckDefault"
             checked={enabledForCurPage}
             onChange={handleToggleEnable}
           />
-          <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
-            {enabledForCurPage ? 'enabled' : 'disabled'} for current page
+          <label
+            className="form-check-label col-auto"
+            htmlFor="flexSwitchCheckDefault"
+          >
+            {enabledForCurPage ? 'Enabled' : 'Disabled'} for current domain
           </label>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

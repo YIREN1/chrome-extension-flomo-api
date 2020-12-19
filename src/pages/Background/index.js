@@ -23,6 +23,7 @@ async function onMessageWrapper(request, sender) {
 async function receiver(request, sender) {
   // !await will result in error
   const tabId = await getCurrentTabId();
+  let defaultTag = '';
   // todo should need a better sol to detect if from popup, sperate handler
   // if from the pop up
   if (sender.url.includes('popup.html')) {
@@ -42,7 +43,7 @@ async function receiver(request, sender) {
   return (
     axios
       .post(FLOMO_API, {
-        content: `#testfromChrome ${request.text}`,
+        content: `${defaultTag}${request.text}`,
       })
 
       .then((response) => response.data)

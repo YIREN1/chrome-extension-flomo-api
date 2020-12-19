@@ -6,7 +6,11 @@ interface Props {
 }
 
 const Options: React.FC<Props> = ({ title }: Props) => {
-  return <div className="OptionsContainer">{title.toUpperCase()} PAGE</div>;
+  return (
+    <div className="OptionsContainer">
+      {title.toUpperCase()} PAGE (Comming soon)
+    </div>
+  );
 };
 
 export default Options;
