@@ -1,37 +1,61 @@
 import '../../assets/img/logo-192.png';
-import './badge';
+// import './badge';
+import axios from 'axios';
+import { getOptions, chromeTabsSendMessage, getCurrentTabId } from '../utils';
+import asyncToChromeListener from './asyncToChromeListener';
 console.log('background page.');
-chrome.runtime.onMessage.addListener(receiver);
 let FLOMO_API = '';
 
-function receiver(request, sender, sendResponse) {
-  // todo should need a better sol
+async function installed() {
+  ({ FLOMO_API } = await getOptions('FLOMO_API'));
+}
+chrome.runtime.onInstalled.addListener(installed);
+
+function onInstallWrapper(d) {
+  installed();
+}
+chrome.runtime.onMessage.addListener(asyncToChromeListener(onMessageWrapper));
+
+// no async for listener
+async function onMessageWrapper(request, sender) {
+  return await receiver(request, sender);
+}
+async function receiver(request, sender) {
+  // !await will result in error
+  const tabId = await getCurrentTabId();
+  // todo should need a better sol to detect if from popup, sperate handler
   // if from the pop up
   if (sender.url.includes('popup.html')) {
     console.log('flomo api received');
+    await chromeTabsSendMessage(tabId, {
+      name: 'notif',
+      message: 'Flomo api received',
+    });
     FLOMO_API = request.api;
     return;
   }
-  // console.log(request);
 
   if (!FLOMO_API) {
-    alert('no flomo api set');
+    alert('No flomo api set');
     return;
   }
+  return (
+    axios
+      .post(FLOMO_API, {
+        content: `#testfromChrome ${request.text}`,
+      })
 
-  fetch(FLOMO_API, {
-    method: 'POST',
-    // Adding body or contents to send
-    body: JSON.stringify({
-      content: `#testfromChrome ${request.text}`,
-    }),
-
-    // Adding headers to the request
-    headers: {
-      'Content-type': 'application/json',
-    },
-  })
-    .then((response) => response.json())
-    .then((res) => sendResponse(res));
-  return true;
+      .then((response) => response.data)
+      // .then((res) => {
+      //   sendResponse(res);
+      // todo consider where should we put this logic
+      //   // chromeTabsSendMessage(tabId, {
+      //   //   name: 'notif',
+      //   //   message: res.message,
+      //   // });
+      // })
+      .catch((e) => {})
+  );
+  //todo
+  // return true;
 }
