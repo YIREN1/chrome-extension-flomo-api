@@ -1,31 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Popup.css';
 // import secrets from 'secrets'.;
-import { getOptions, isHostEnabled } from '../utils';
+import {
+  getOptions,
+  isHostEnabled,
+  getTabLocation,
+  getCurrentTabId,
+  chromeLocalSet,
+  chromeTabsSendMessage,
+} from '../utils';
 import { get } from 'jquery';
 const Popup = () => {
   const [api, setApi] = useState('');
   const [enabledForCurPage, setEnabledForCurPage] = useState(true);
-  console.log(api);
-
+  const [location, setLocation] = useState();
+  useEffect(() => {
+    const ready = async () => {
+      const curLocation = await getTabLocation();
+      setLocation(curLocation);
+      if (curLocation) {
+        const enable = await isHostEnabled(location);
+        setEnabledForCurPage(enable);
+      }
+    };
+    ready();
+  }, []);
   function handleClick(e) {
     chrome.runtime.sendMessage({
       api,
     });
+    chromeLocalSet({ FLOMO_API: api });
   }
   const handleToggleEnable = async (e) => {
     try {
-      const res = await getOptions('excludeDomains');
-      console.log(res);
+      let { excludeDomains } = await getOptions('excludeDomains');
+      const { host } = location;
+      const tabId = await getCurrentTabId();
+      if (!enabledForCurPage) {
+        // todo duplicate
+        // excludeDomains = excludeDomains.filter((domain) => domain !== host);
+        excludeDomains.splice(excludeDomains.indexOf(host), 1);
+      } else {
+        excludeDomains.push(host);
+      }
 
-      const enable = await isHostEnabled();
-      console.log(enable);
+      await chromeLocalSet({ excludeDomains });
+
+      // todo might need change current enabledForCurPage is old value,
+      chromeTabsSendMessage(tabId, {
+        name: 'change_enable',
+        enable: !enabledForCurPage,
+      });
+      setEnabledForCurPage(!enabledForCurPage);
     } catch (error) {
       console.log(error);
     }
-
-    // console.log(e.target.value);
-    setEnabledForCurPage(!enabledForCurPage);
   };
   async function handleChange(e) {
     setApi(e.target.value);

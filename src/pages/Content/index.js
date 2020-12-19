@@ -1,7 +1,8 @@
 import { Notyf } from 'notyf';
+import { isHostEnabled } from '../utils';
 // Create an instance of Notyf
 import 'notyf/notyf.min.css';
-
+import './server';
 const notyf = new Notyf({
   position: {
     x: 'right',
@@ -11,8 +12,16 @@ const notyf = new Notyf({
 
 const MOUSE_UP = 'mouseup',
   selection = getSelection();
+
+async function startup() {
+  enabled = await isHostEnabled(location);
+}
+
+export function onEnabledChange(newEnableVal) {
+  console.log(newEnableVal);
+  enabled = newEnableVal;
+}
 let enabled = true;
-const IS_TOUCH = false;
 
 const getXY = (e) => ({ x: e.pageX, y: e.pageY });
 
@@ -29,7 +38,6 @@ const setStyleProp = (el, obj) => {
 };
 
 function firstMouseUp(e) {
-  // console.log(e.target);
   const text = getText();
   if (btn.contains(e.target) && !text) {
     return;
@@ -44,7 +52,6 @@ function firstMouseUp(e) {
       translateY: 0,
       padding: '2px',
     };
-    // console.log(getText());
 
     const { x, y } = getXY(e);
     let left = x - window.pageXOffset,
@@ -53,17 +60,12 @@ function firstMouseUp(e) {
     if (top < 0) top = 0;
     btnPos.translateX = left;
     btnPos.translateY = top;
-    // console.log(btnPos);
 
     btnPos.transform = `translateX(${btnPos.translateX}px) translateY(${btnPos.translateY}px)`;
     btnPos.display = 'block';
 
     setStyleProp(btn, btnPos);
   }
-}
-
-function removeFirstMouseUp() {
-  document.removeEventListener(MOUSE_UP, firstMouseUp);
 }
 
 document.addEventListener(MOUSE_UP, firstMouseUp);
@@ -86,7 +88,6 @@ div.style.position = 'absolute';
 
 // todo figure out id
 let imgURL = `url(${chrome.extension.getURL('logo-192.png')})`;
-// console.log(imgURL)
 const spanStyle = {
   width: '18px',
   height: '18px',
@@ -100,32 +101,30 @@ btn.appendChild(span);
 
 document.documentElement.appendChild(div);
 
-const event = new Event('select');
-
 btn.addEventListener('click', onClikcButton, false);
 
 function onClikcButton() {
-  alert('click');
   btn.style.display = 'none';
 
   const text = getText();
-  // console.log(text);
   let message = {
     text,
   };
   chrome.runtime.sendMessage(message, {}, handleResponse);
 
   function handleResponse(res) {
-    console.log(res);
-    if (!res) {
+    // no code
+    if (res.code !== 0 && !res.code) {
+      console.error(res, 'no response or failed');
       return;
     }
-    if (res?.data === 0) {
+    console.log(res);
+    if (res?.code === 0) {
       notyf.success(res.message);
     } else {
       notyf.error(res.message);
     }
   }
 }
-
-console.log('content scripts loaded, react');
+startup();
+console.log('content scripts loaded');

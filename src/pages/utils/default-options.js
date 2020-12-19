@@ -1,6 +1,6 @@
 import promisify from './promisify';
 const defaultOptions = {
-  excludeDomains: ['google.com/*'],
+  excludeDomains: [],
   FLOMO_API: '',
 };
 
