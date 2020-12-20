@@ -11,7 +11,7 @@
 - [x] api received feedback
 - [x] remove #testfromChrome
 - [x] show api on popup after set
-- [] popup send message bug
+- [x] popup send message bug
 release
 
 
