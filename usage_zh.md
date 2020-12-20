@@ -16,4 +16,8 @@
 
 **如果碰到 bug，请不要犹豫，来提[issues](https://github.com/YIREN1/chrome-extension-flomo-api/issues)**
 
+有兴趣可以来即刻找我玩
+
+<img src="jike.jpeg" alt="drawing" width="100"/>
+
 **谢谢朋友们！**
