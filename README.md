@@ -33,6 +33,16 @@
 1. show a button which users can click to send notes
 2. choose which hosts/domains to enable/disable the feature
 
+## built with
+
+- reactjs
+- bootstrap
+- webpack
+- babel
+- notif
+- axios
+
+
 ## TODO
 
 - [] default tags, eg: #from <url>, #(from chrome extension), etc.
