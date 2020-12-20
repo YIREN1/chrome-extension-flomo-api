@@ -19,7 +19,7 @@
 1. clone this repo
 2. make sure npm is installed by the command `npm -v`
 3. `npm i`
-4. `npm build`
+4. `npm start`
 3. go to chrome://extensions/ on chrome
 4. enable developer mode
 5. Load your extension on Chrome following:
@@ -36,4 +36,14 @@
 
 ## TODO
 
-- [] add more advanced 
+- [] add more advanced websites blacklist/whitelist logic
+- [] make UI look better (obviously I am not UI expert)
+- [] auto detect url from https://flomoapp.com/mine?source=incoming_webhook
+- [] support other official API
+- [] alternative send method: command/ctrl 
+
+## Author
+
+Yi Ren
+
+jamesren1998@gmail.com
