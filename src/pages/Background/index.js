@@ -22,18 +22,19 @@ async function onMessageWrapper(request, sender) {
 }
 async function receiver(request, sender) {
   // !await will result in error
-  const tabId = await getCurrentTabId();
   let defaultTag = '';
   // todo should need a better sol to detect if from popup, sperate handler
   // if from the pop up
   if (sender.url.includes('popup.html')) {
     console.log('flomo api received');
-    await chromeTabsSendMessage(tabId, {
+    //todo move to
+    
+    FLOMO_API = request.api;
+    // console.log(FLOMO_API);
+    return {
       name: 'notif',
       message: 'Flomo api received',
-    });
-    FLOMO_API = request.api;
-    return;
+    };
   }
 
   if (!FLOMO_API) {

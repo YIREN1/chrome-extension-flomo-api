@@ -112,8 +112,8 @@ function onClikcButton() {
   chrome.runtime.sendMessage(message, {}, handleResponse);
 
   function handleResponse(res) {
-    // no code
-    if (res.code !== 0 && !res.code) {
+    // no res or no res.code
+    if (!res || (res.code !== 0 && !res.code)) {
       console.error(res, 'no response or failed');
       return;
     }

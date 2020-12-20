@@ -59,7 +59,11 @@ export async function getCurrentTabId() {
         }
       }
     );
-  }).then((data) => data[0].id);
+  })
+    .then((data) => data[0].id)
+    .catch((e) => {
+      console.log(e);
+    });
 }
 export async function getTabLocation(tabId) {
   if (!tabId) {

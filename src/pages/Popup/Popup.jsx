@@ -14,12 +14,15 @@ const Popup = () => {
   const [api, setApi] = useState('');
   const [enabledForCurPage, setEnabledForCurPage] = useState(true);
   const [location, setLocation] = useState();
+  const [tabId, setTabId] = useState();
   useEffect(() => {
     const ready = async () => {
-      const curLocation = await getTabLocation();
+      const curTabId = await getCurrentTabId();
+      const curLocation = await getTabLocation(curTabId);
       const { FLOMO_API } = await getOptions('FLOMO_API');
 
       setApi(FLOMO_API);
+      setTabId(curTabId);
       setLocation(curLocation);
       if (curLocation) {
         const enable = await isHostEnabled(location);
@@ -29,9 +32,19 @@ const Popup = () => {
     ready();
   }, []);
   function handleClick(e) {
-    chrome.runtime.sendMessage({
-      api,
-    });
+    chrome.runtime.sendMessage(
+      {
+        api,
+      },
+      handleResponse
+    );
+    function handleResponse(res) {
+      console.log(res);
+      chromeTabsSendMessage(tabId, {
+        name: 'notif',
+        message: 'Flomo api received',
+      });
+    }
     chromeLocalSet({ FLOMO_API: api });
   }
   const handleToggleEnable = async (e) => {
