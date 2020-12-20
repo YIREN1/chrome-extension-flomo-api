@@ -2,9 +2,10 @@
 
 # Chrome Extension for flomo api
 
-## getting started
+## Development getting started
 
 1. clone this repo
+2. make sure npm is installed by the command `npm -v`
 2. go to chrome://extensions/ on chrome
 3. enable developer mode
 4. Load your extension on Chrome following:

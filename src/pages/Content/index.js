@@ -18,7 +18,6 @@ async function startup() {
 }
 
 export function onEnabledChange(newEnableVal) {
-  console.log(newEnableVal);
   enabled = newEnableVal;
 }
 let enabled = true;

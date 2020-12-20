@@ -18,7 +18,7 @@ const Popup = () => {
     const ready = async () => {
       const curLocation = await getTabLocation();
       const { FLOMO_API } = await getOptions('FLOMO_API');
-      console.log(FLOMO_API);
+
       setApi(FLOMO_API);
       setLocation(curLocation);
       if (curLocation) {

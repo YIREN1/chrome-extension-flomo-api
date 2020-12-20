@@ -7,11 +7,11 @@
 - [] readme
 - [x] style button
 - [x] style popup
-- [] console.logs
+- [x] console.logs
 - [x] on storage-change send message to enable content script
 - [x] api received feedback
 - [x] remove #testfromChrome
-- [] show api on popup after set
+- [x] show api on popup after set
 release
 
 - [] auto detect url from https://flomoapp.com/mine?source=incoming_webhook
