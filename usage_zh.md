@@ -13,3 +13,7 @@
 5. 选中文字，点击弹出的 flomo 图标， (让子弹飞一会), 即可保存到 flomo
 
 6. 如果看见弹出提示"no flomo api set"， 说明没有在 popup 中成功设置 api,请返回步骤 3
+
+**如果碰到 bug，请不要犹豫，来提[issues](https://github.com/YIREN1/chrome-extension-flomo-api/issues)**
+
+**谢谢朋友们！**
