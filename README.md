@@ -16,17 +16,15 @@
 ## Development getting started
 
 1. clone this repo
-2. make sure npm is installed by the command `npm -v`
+2. install npm, make sure npm is installed by the command `npm -v`
 3. `npm i`
 4. `npm start`
-5. go to chrome://extensions/ on chrome
-6. enable developer mode
-7. Load your extension on Chrome following:
+5. Load the extension on Chrome as following:
    1. Access `chrome://extensions/`
    2. Check `Developer mode`
    3. Click on `Load unpacked extension`
    4. Select the `build` folder.
-8. Happy hacking.
+6. Happy hacking.
 
 ## features
 
