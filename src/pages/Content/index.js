@@ -1,6 +1,5 @@
 import { Notyf } from 'notyf';
 import { isHostEnabled } from '../utils';
-// Create an instance of Notyf
 import 'notyf/notyf.min.css';
 import './server';
 const notyf = new Notyf({
@@ -73,7 +72,6 @@ document.addEventListener('mousedown', (e) => {
   const { target } = e;
   if (btn.contains(target)) {
     e.preventDefault();
-    // onClikcButton();
   } else {
     btn.style.display = 'none';
   }

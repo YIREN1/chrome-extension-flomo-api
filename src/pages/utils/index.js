@@ -1,6 +1,4 @@
-import promisify from './promisify';
 import { getDefaultOptions } from './default-options';
-import chromeCall from 'chrome-call';
 
 export async function chromeLocalGet(keys) {
   return new Promise((resolve, reject) => {
@@ -74,9 +72,9 @@ export async function getTabLocation(tabId) {
 }
 
 export async function isHostEnabled(locationObj, disabledDomainList) {
-  const { disableSelection } = await chromeLocalGet('disableSelection');
+  const { enabledAllSites } = await chromeLocalGet('enabledAllSites');
 
-  if (disableSelection) {
+  if (!enabledAllSites) {
     return false;
   }
   const location =
@@ -93,3 +91,5 @@ export async function isHostEnabled(locationObj, disabledDomainList) {
     (await chromeLocalGet('excludeDomains')).excludeDomains;
   return !domains || !domains.some((domain) => host.endsWith(domain));
 }
+
+export async function clearLocalStorage() {}

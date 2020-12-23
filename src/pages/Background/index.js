@@ -1,5 +1,5 @@
 import '../../assets/img/logo-192.png';
-// import './badge';
+import './badge';
 import axios from 'axios';
 import { getOptions, chromeTabsSendMessage, getCurrentTabId } from '../utils';
 import asyncToChromeListener from './asyncToChromeListener';
@@ -11,9 +11,6 @@ async function installed() {
 }
 chrome.runtime.onInstalled.addListener(installed);
 
-function onInstallWrapper(d) {
-  installed();
-}
 chrome.runtime.onMessage.addListener(asyncToChromeListener(onMessageWrapper));
 
 // no async for listener
@@ -21,7 +18,6 @@ async function onMessageWrapper(request, sender) {
   return await receiver(request, sender);
 }
 async function receiver(request, sender) {
-  // !await will result in error
   let defaultTag = '';
   // todo should need a better sol to detect if from popup, sperate handler
   // if from the pop up
@@ -30,7 +26,6 @@ async function receiver(request, sender) {
     //todo move to
     
     FLOMO_API = request.api;
-    // console.log(FLOMO_API);
     return {
       name: 'notif',
       message: 'Flomo api received',
@@ -48,16 +43,6 @@ async function receiver(request, sender) {
       })
 
       .then((response) => response.data)
-      // .then((res) => {
-      //   sendResponse(res);
-      // todo consider where should we put this logic
-      //   // chromeTabsSendMessage(tabId, {
-      //   //   name: 'notif',
-      //   //   message: res.message,
-      //   // });
-      // })
       .catch((e) => {})
   );
-  //todo
-  // return true;
 }
