@@ -1,7 +1,10 @@
 /* eslint-disable no-restricted-globals */
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
-import {onEnabledChange} from './index';
+import { onEnabledChange } from './index';
+import watcher from '../utils/storage-watcher';
+import { isHostEnabled } from '../utils';
+
 const notyf = new Notyf({
   position: {
     x: 'right',
@@ -14,6 +17,20 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     notyf.success(request.message);
   }
   if (request.name === 'change_enable') {
-    onEnabledChange(request.enable);
+    // onEnabledChange(request.enable);
   }
 });
+
+async function onStorageChanged(items) {
+  const { enabledAllSites, excludeDomains } = items;
+  console.log(enabledAllSites, excludeDomains);
+  if (enabledAllSites || enabledAllSites === false) {
+    onEnabledChange(enabledAllSites);
+  } else if (excludeDomains) {
+    const enable = await isHostEnabled(location, excludeDomains);
+    onEnabledChange(enable);
+  }
+}
+
+// watcher('excludeDomains', onStorageChanged);
+watcher(['enabledAllSites', 'excludeDomains'], onStorageChanged);

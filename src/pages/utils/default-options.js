@@ -1,7 +1,7 @@
-import promisify from './promisify';
 const defaultOptions = {
   excludeDomains: [],
   FLOMO_API: '',
+  enabledAllSites: true,
 };
 
 export function getDefaultOptions(_keys) {
@@ -18,4 +18,3 @@ export function getDefaultOptions(_keys) {
   });
   return optionsObj;
 }
-
