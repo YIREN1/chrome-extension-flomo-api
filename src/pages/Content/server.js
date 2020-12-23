@@ -23,7 +23,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 async function onStorageChanged(items) {
   const { enabledAllSites, excludeDomains } = items;
-  console.log(enabledAllSites, excludeDomains);
   if (enabledAllSites || enabledAllSites === false) {
     onEnabledChange(enabledAllSites);
   } else if (excludeDomains) {

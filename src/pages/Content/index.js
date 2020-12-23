@@ -115,7 +115,7 @@ function onClikcButton() {
       console.error(res, 'no response or failed');
       return;
     }
-    console.log(res);
+    
     if (res?.code === 0) {
       notyf.success(res.message);
     } else {

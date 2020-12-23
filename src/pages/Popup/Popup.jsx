@@ -47,7 +47,6 @@ const Popup = () => {
       handleResponse
     );
     function handleResponse(res) {
-      console.log(res);
       chromeTabsSendMessage(tabId, {
         name: 'notif',
         message: 'Flomo api received',
