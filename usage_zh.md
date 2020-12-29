@@ -2,8 +2,6 @@
 
 **已发布 chrome web store，~~应该几天内会发布~~**
 
-在此之前,我只好 commit build 文件夹，还需要麻烦使用者下载后定位 build 文件夹
-
 1. 谷歌应用商店下载Flomo API
 
 2. 在“添加至chrome”之前打开的网页需要刷新一下，才能使用插件
