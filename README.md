@@ -50,6 +50,9 @@
 - [] support other official API
 - [] alternative send method: command/ctrl
 
+## Discussion:
+https://github.com/flomoapp/3rd-party-tools/discussions/12
+
 ## Author
 
 Yi Ren
