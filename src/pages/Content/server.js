@@ -14,7 +14,11 @@ const notyf = new Notyf({
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.name === 'get_location') sendResponse(location);
   if (request.name === 'notif') {
-    notyf.success(request.message);
+    if (request.code) {
+      notyf.error(request.message);
+    } else {
+      notyf.success(request.message);
+    }
   }
   if (request.name === 'change_enable') {
     // onEnabledChange(request.enable);

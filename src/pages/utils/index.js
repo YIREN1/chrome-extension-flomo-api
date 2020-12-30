@@ -26,7 +26,7 @@ export async function chromeLocalSet(data) {
 
 export async function chromeTabsSendMessage(tabId, message) {
   return new Promise((resolve, reject) => {
-    chrome.tabs.sendMessage(tabId, message, (response) => {
+    chrome.tabs.sendMessage(tabId, message, {}, (response) => {
       if (chrome.runtime.lastError) {
         reject(chrome.runtime.lastError);
       } else {

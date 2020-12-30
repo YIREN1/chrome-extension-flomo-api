@@ -124,4 +124,4 @@ function onClikcButton() {
   }
 }
 startup();
-console.log('content scripts loaded');
+// console.log('content scripts loaded');
