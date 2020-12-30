@@ -28,6 +28,10 @@ async function onMessageWrapper(request, sender) {
 }
 
 const sendToFlomo = async (text) => {
+  if (!FLOMO_API) {
+    alert('No flomo api set');
+    return;
+  }
   return axios
     .post(FLOMO_API, {
       content: `${text}`,
@@ -45,6 +49,7 @@ async function sendToFlomoWithText(info, tab) {
   let content = formatContent(info.selectionText, tab.url);
   try {
     const res = await sendToFlomo(content);
+    if (!res) return;
     const tabId = await getCurrentTabId();
     // todo message port closed before...
     await chromeTabsSendMessage(tabId, {
@@ -70,9 +75,5 @@ async function receiver(request, sender) {
     };
   }
 
-  if (!FLOMO_API) {
-    alert('No flomo api set');
-    return;
-  }
   return sendToFlomo(request.text);
 }

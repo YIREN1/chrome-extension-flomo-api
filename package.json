@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "node utils/build.js",
-    "pack":"npm run build && zip -r -q build.zip build/",
+    "publish":"npm run build && zip -r -q build.zip build/",
     "start": "node utils/webserver.js",
     "prettier": "prettier --write '**/*.{js,jsx,css,html}'"
   },
