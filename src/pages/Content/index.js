@@ -106,6 +106,7 @@ function onClikcButton() {
   const text = getText();
   let message = {
     text,
+    url: location.href
   };
   chrome.runtime.sendMessage(message, {}, handleResponse);
 

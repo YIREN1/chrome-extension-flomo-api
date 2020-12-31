@@ -27,14 +27,14 @@ async function onMessageWrapper(request, sender) {
   return await receiver(request, sender);
 }
 
-const sendToFlomo = async (text) => {
+const sendToFlomo = async (content) => {
   if (!FLOMO_API) {
     alert('No flomo api set');
     return;
   }
   return axios
     .post(FLOMO_API, {
-      content: `${text}`,
+      content: `${content}`,
     })
 
     .then((response) => response.data)
@@ -42,7 +42,9 @@ const sendToFlomo = async (text) => {
 };
 
 function formatContent(selectionText, url) {
-  return `<p>${defaultTag}${selectionText}</p><p>From: ${url}</p>`;
+  return `<p>${defaultTag}${selectionText}</p>${
+    url ? `<p>From: ${url}</p>` : ''
+  }`;
 }
 
 async function sendToFlomoWithText(info, tab) {
@@ -74,6 +76,6 @@ async function receiver(request, sender) {
       message: 'Flomo api received',
     };
   }
-
-  return sendToFlomo(request.text);
+  // from content script
+  return sendToFlomo(formatContent(request.text,request.url));
 }

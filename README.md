@@ -30,6 +30,13 @@
 
 1. show a button which users can click to send notes
 2. choose which hosts/domains to enable/disable the feature
+3. show an entry "send to flomo" in context menus
+
+CHANGELOG
+
+12.31 0.2.0
+
+add 
 
 ## built with
 
