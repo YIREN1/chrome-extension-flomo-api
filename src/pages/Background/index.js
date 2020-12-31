@@ -13,14 +13,26 @@ async function installed() {
 chrome.runtime.onInstalled.addListener(installed);
 
 chrome.runtime.onMessage.addListener(asyncToChromeListener(onMessageWrapper));
-
-chrome.contextMenus.create({
-  type: 'normal',
-  title: 'Save Text to Flomo',
-  id: 'flomoText',
-  onclick: sendToFlomoWithText,
-  contexts: ['selection'],
-});
+let created = false;
+function createMenus() {
+  if (!created) {
+    created = true;
+    chrome.contextMenus.create({
+      type: 'normal',
+      title: 'Save Text to Flomo',
+      id: 'flomoText',
+      onclick: sendToFlomoWithText,
+      contexts: ['selection'],
+      documentUrlPatterns: [
+        'http://*/*',
+        'https://*/*',
+        'file:///*',
+        'about:blank',
+      ],
+    });
+  }
+}
+createMenus();
 
 // no async for listener
 async function onMessageWrapper(request, sender) {
@@ -77,5 +89,5 @@ async function receiver(request, sender) {
     };
   }
   // from content script
-  return sendToFlomo(formatContent(request.text,request.url));
+  return sendToFlomo(formatContent(request.text, request.url));
 }
