@@ -32,11 +32,12 @@
 2. choose which hosts/domains to enable/disable the feature
 3. show an entry "send to flomo" in context menus
 
-CHANGELOG
+### CHANGELOG
 
-12.31 0.2.0
+- 12.31 v0.2.2
 
-add 
+1. add default tag : '#chrome ' and from <url>
+2. add context menus entry to allow alternative sending methods
 
 ## built with
 

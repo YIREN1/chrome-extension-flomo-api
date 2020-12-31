@@ -14,7 +14,7 @@
 
 6. popup有两个按钮，第一个enable/disable for site 负责黑名单某些网站，如 当前页面为google.com/search?*****,那么disable for site 表示所有google.com 的域名都会禁用此extension，意在能让用户选择不在某些域名上弹出发送按钮
 
-7. 第二个按钮是全局开关，关掉将不会在任何网站弹出发送按钮
+7. 第二个按钮是全局开关，关掉将不会在任何网站弹出发送按钮, 如果您不喜欢弹出按钮的方式，可以关掉这个开关，仍可以通过右键选择'Save Text to Flomo'来保存到flomo
 
 8. Enjoy!
 
