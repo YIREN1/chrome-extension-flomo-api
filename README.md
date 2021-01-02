@@ -45,9 +45,8 @@
 - bootstrap
 - webpack
 - babel
-- notif
+- notif (why notif instead of chrome.notifications? Because chrome notification does not show colors and thus users cannot easily tell if their action is successful or not)
 - axios
-
 
 ## TODO
 
@@ -59,6 +58,7 @@
 - [] alternative send method: command/ctrl
 
 ## Discussion:
+
 https://github.com/flomoapp/3rd-party-tools/discussions/12
 
 ## Author

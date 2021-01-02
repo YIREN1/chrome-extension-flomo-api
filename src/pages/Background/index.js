@@ -78,7 +78,10 @@ async function sendToFlomoWithText(info, tab) {
 async function receiver(request, sender) {
   // todo should need a better sol to detect if from popup, sperate handler
   // if from the pop up
-  if (sender.url.includes('popup.html')) {
+  if (
+    sender.url.includes('popup.html') ||
+    sender.url.includes('chrome-extension')
+  ) {
     console.log('flomo api received');
     //todo move to
 
