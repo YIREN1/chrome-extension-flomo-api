@@ -41,5 +41,5 @@ export function onStorageChanged(changedItems) {
 
 watcher('excludeDomains', onStorageChanged);
 const { tabs } = chrome;
-// tabs.onUpdated.addListener(onTabsUpdated);
+tabs.onUpdated.addListener(onTabsUpdated);
 tabs.onActivated.addListener(onTabsActivated);
