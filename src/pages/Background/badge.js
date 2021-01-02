@@ -27,7 +27,7 @@ export async function onTabsActivated({ tabId }) {
  */
 export async function updateBadge(tabId) {
   try {
-    const enable = await isHostEnabled(await getTabLocation(tabId), domains);
+    const enable = await isHostEnabled(tabId, domains);
     chrome.browserAction.setBadgeText({ text: enable ? '' : 'off' });
   } catch (error) {
     console.log(error);
@@ -41,5 +41,5 @@ export function onStorageChanged(changedItems) {
 
 watcher('excludeDomains', onStorageChanged);
 const { tabs } = chrome;
-tabs.onUpdated.addListener(onTabsUpdated);
+// tabs.onUpdated.addListener(onTabsUpdated);
 tabs.onActivated.addListener(onTabsActivated);
