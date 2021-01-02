@@ -27,7 +27,7 @@ export async function onTabsActivated({ tabId }) {
  */
 export async function updateBadge(tabId) {
   try {
-    const enable = await isHostEnabled(tabId, domains);
+    const enable = await isHostEnabled(await getTabLocation(tabId), domains);
     chrome.browserAction.setBadgeText({ text: enable ? '' : 'off' });
   } catch (error) {
     console.log(error);

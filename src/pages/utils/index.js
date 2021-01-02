@@ -38,7 +38,6 @@ export async function chromeTabsSendMessage(tabId, message) {
 
 export async function getOptions(keys, area = 'local') {
   return chromeLocalGet(keys);
-  // return chromeCall(`storage.${area}`, 'get', 'excludeDomains');
 }
 
 export async function getCurrentTabId() {
