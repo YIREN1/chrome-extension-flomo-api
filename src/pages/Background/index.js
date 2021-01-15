@@ -54,9 +54,7 @@ const sendToFlomo = async (content) => {
 };
 
 function formatContent(selectionText, url) {
-  return `${defaultTag}${selectionText}\n${
-    url ? `From: ${url}` : ''
-  }`;
+  return `${defaultTag}${selectionText}\n${url ? `From: ${url}` : ''}`;
 }
 
 async function sendToFlomoWithText(info, tab) {
