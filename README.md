@@ -9,7 +9,7 @@
   </p>
 </p>
 
-**The extension is currently under review by chrome web store and will be published after passing the review**
+https://chrome.google.com/webstore/detail/flomo-api/bliaamgfpeogldcelkmkegfofapaocfn/related?hl=en&authuser=0
 
 [点此查看用法](usage_zh.md)
 
