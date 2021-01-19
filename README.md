@@ -50,8 +50,8 @@ https://chrome.google.com/webstore/detail/flomo-api/bliaamgfpeogldcelkmkegfofapa
 
 ## TODO
 
-- [] default tags, eg: #from <url>, #(from chrome extension), etc.
-- [] add more advanced websites blacklist/whitelist logic
+- [x] default tags, eg: #from <url>, #(from chrome extension), etc.
+- [x] add more advanced websites blacklist/whitelist logic
 - [] make UI look better (obviously I am not UI expert)
 - [] auto detect url from https://flomoapp.com/mine?source=incoming_webhook
 - [] support other official API
