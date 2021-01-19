@@ -11,6 +11,8 @@
 
 https://chrome.google.com/webstore/detail/flomo-api/bliaamgfpeogldcelkmkegfofapaocfn/related?hl=en&authuser=0
 
+https://flomoapp.com/
+
 [点此查看用法](usage_zh.md)
 
 ## Development getting started
